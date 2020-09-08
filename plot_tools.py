@@ -1,6 +1,6 @@
 # https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html
 
-def plot_img(figsize, imgs, img_list, suptitle='imgs', vmin=1.32, vmax=1.42, cmap='viridis'):
+def plot_in_rows(figsize, imgs, img_list, suptitle='imgs', vmin=1.32, vmax=1.42, cmap='viridis'):
     '''
     imgs: list of 2d arrays (images)
     img_list: list of strings (name of the images)
