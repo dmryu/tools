@@ -5,9 +5,13 @@ def plot_in_rows(figsize, imgs, img_list=None, suptitle=None, vmin=1.32, vmax=1.
     imgs: list of 2d arrays (images)
     img_list: list of strings (name of the images)
     '''
+    from mpl_toolkits.axes_grid1 import make_axes_locatable
+    import matplotlib.pyplot as plt
+    %matplotlib inline
+
     if img_list is None:
         img_list = np.arange(len(imgs))
-    from mpl_toolkits.axes_grid1 import make_axes_locatable
+
     plt.figure(figsize=figsize)
     n = len(imgs)
     
@@ -21,9 +25,9 @@ def plot_in_rows(figsize, imgs, img_list=None, suptitle=None, vmin=1.32, vmax=1.
         cax = divider.append_axes("right", size="5%", pad=0.03)
         cb = plt.colorbar(im, cax=cax)
         cb.ax.tick_params(labelsize=10)
-        ax.set_title(k, fontsize=15)
+        ax.set_title(k, fontsize=10)
     plt.tight_layout()
     if suptitle is not None:
-        plt.suptitle(suptitle, fontsize=15)
+        plt.suptitle(suptitle, fontsize=12)
     plt.show()
     plt.close()
