@@ -1,13 +1,12 @@
 # https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html
 
-def plot_in_rows(figsize, imgs, img_list=None, suptitle=None, vmin=1.32, vmax=1.42, cmap='viridis'):
+def plot_in_rows(figsize, imgs, img_list=None, suptitle=None, vmin=None, vmax=None, cmap='viridis'):
     '''
     imgs: list of 2d arrays (images)
     img_list: list of strings (name of the images)
     '''
     from mpl_toolkits.axes_grid1 import make_axes_locatable
     import matplotlib.pyplot as plt
-    %matplotlib inline
 
     if img_list is None:
         img_list = np.arange(len(imgs))
@@ -19,7 +18,14 @@ def plot_in_rows(figsize, imgs, img_list=None, suptitle=None, vmin=1.32, vmax=1.
         ax = plt.subplot(1, n, i+1)
         plt.axis('on')
         img = imgs[i]
-        im = plt.imshow(img, vmin=vmin, vmax=vmax, cmap=cmap)
+        if vmin is not None and vmax is not None:
+            im = plt.imshow(img, vmin=vmin, vmax=vmax, cmap=cmap)
+        elif vmin is not None and vmax is None:
+            im = plt.imshow(img, vmin=vmin, cmap=cmap)
+        elif vmin is None and vmax is not None:
+            im = plt.imshow(img, vmax=vmax, cmap=cmap)
+        else:
+            im = plt.imshow(img, cmap=cmap)
         plt.tick_params(labelsize=10)
         divider = make_axes_locatable(ax)
         cax = divider.append_axes("right", size="5%", pad=0.03)
