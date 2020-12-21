@@ -1,6 +1,6 @@
 # https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html
 
-def plot_in_rows(figsize, imgs, img_list=None, suptitle=None, vmin=None, vmax=None, cmap='viridis'):
+def plot_in_rows(figsize, imgs, titles=None, suptitle=None, vmin=None, vmax=None, cmap='viridis'):
     '''
     imgs: list of 2d arrays (images)
     img_list: list of strings (name of the images)
@@ -8,13 +8,13 @@ def plot_in_rows(figsize, imgs, img_list=None, suptitle=None, vmin=None, vmax=No
     from mpl_toolkits.axes_grid1 import make_axes_locatable
     import matplotlib.pyplot as plt
 
-    if img_list is None:
-        img_list = np.arange(len(imgs))
+    if titles is None:
+        titles = np.arange(len(imgs))
 
     plt.figure(figsize=figsize)
     n = len(imgs)
     
-    for i, k in enumerate(img_list):
+    for i, k in enumerate(titles):
         ax = plt.subplot(1, n, i+1)
         plt.axis('on')
         img = imgs[i]
