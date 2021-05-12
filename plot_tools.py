@@ -7,11 +7,13 @@ def plot_single(img,
                 fontsize=10, 
                 vmin=None, 
                 vmax=None, 
-                cmap='viridis'):
+                cmap='viridis',
+                save=False,
+                show=True):
     from mpl_toolkits.axes_grid1 import make_axes_locatable
     import matplotlib.pyplot as plt
     
-    fig, ax = plt.subplots(figsize=(5,5))
+    fig, ax = plt.subplots(figsize=figsize)
     if vmin is not None and vmax is not None:
         im = plt.imshow(img, vmin=vmin, vmax=vmax, cmap=cmap)
     elif vmin is not None and vmax is None:
@@ -29,8 +31,18 @@ def plot_single(img,
         cb = plt.colorbar(im, cax=cax)
         cb.ax.tick_params(labelsize=fontsize)
     plt.tight_layout()
-    ax.set_title(title, fontsize=fontsize*1.4)
-    plt.show()
+    ax.set_title(title, fontsize=fontsize)
+
+    if save==True:
+        Path('./saved_figures').mkdir(exist_ok=True, parents=True)
+        plt.savefig(f"./saved_figures/{title}.png", dpi=200)
+        
+    if show==True:
+        plt.show()
+    else:
+        plt.close()
+        
+        
         
         
 def plot_in_rows(figsize, imgs, titles=None, suptitle=None, vmin=None, vmax=None, cmap='viridis'):
